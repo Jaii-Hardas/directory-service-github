@@ -4,14 +4,18 @@ FROM openjdk:24-jdk-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Define a build-time argument
-ARG imageName
-
-# Set an environment variable using the build-time argument
-ENV IMAGE_NAME=${imageName}
-
-# Copy the JAR file from the build context to the container
-COPY target/${IMAGE_NAME}.jar /app/${IMAGE_NAME}.jar
+# Copy the JAR file directly using its actual name
+COPY target/directory-service-latest.jar /app/directory-service-latest.jar
 
 # Set the entry point to run the JAR file
-ENTRYPOINT ["sh", "-c", "java -jar /app/${IMAGE_NAME}.jar"]
+ENTRYPOINT ["java", "-jar", "/app/directory-service-latest.jar"]
+
+
+
+
+
+
+# docker build --build-arg imageName=api-gateway-github-action-0.0.1-SNAPSHOT -t dnyanyog.org/api-gateway:latest .  
+# docker run -d --name api-gateway -p 8080:8080 dnyanyog.org/api-gateway:latest
+# docker tag dnyanyog.org/api-gateway:latest zodgevv/api-gateway:latest
+#  docker images | Select-String "zodgevv"

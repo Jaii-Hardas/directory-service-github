@@ -65,7 +65,7 @@ public class LoginServiceImp {
     }
   }
 
-  private String decryptAES(String input, String key) {
+  private String decryptAES(final String input, final String key) {
     if (input == null || key == null) {
       throw new IllegalArgumentException("Input and key cannot be null");
     }
